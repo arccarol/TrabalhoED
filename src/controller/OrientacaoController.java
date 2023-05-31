@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 import model.Orientacao;
 
 public class OrientacaoController implements ActionListener {
@@ -17,8 +18,8 @@ public class OrientacaoController implements ActionListener {
 	private  JTextField textFieldTituloOrientacao;
 	private  JTextField textFieldDataOrientacaoOrientacao;
 	private  JTextArea  TextArea;
-	
-	
+
+
 	public OrientacaoController(JTextField textFieldCodOrientacao, JTextField textFieldCoDGRUPOOrientacao,
 			JTextField textFieldTituloOrientacao, JTextField textFieldDataOrientacaoOrientacao, JTextArea textArea) {
 		super();
@@ -40,17 +41,17 @@ public class OrientacaoController implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
-		
+
+
+		}
+
 	}
-		
-}
 	@SuppressWarnings("unused")
 	private void Consulta() {
 		Orientacao orientacao=new Orientacao();
 		orientacao.codOrientacao=textFieldCodOrientacao.getText();
 		System.out.println(orientacao);
-		
+
 	}
 
 
@@ -62,15 +63,15 @@ public class OrientacaoController implements ActionListener {
 		orientacao.data=textFieldDataOrientacaoOrientacao.getText();
 		orientacao.descricao=TextArea.getText();
 		System.out.println(orientacao);
-		
-		
+
+
 		cadastrarOrientacao(orientacao.toString());
 		textFieldCoDGRUPOOrientacao.setText("");
 		textFieldCodOrientacao.setText("");
 		textFieldDataOrientacaoOrientacao.setText("");
 		textFieldTituloOrientacao.setText("");
-		
-		
+		TextArea.setText("");
+
 	}
 
 
@@ -79,7 +80,7 @@ public class OrientacaoController implements ActionListener {
 		File dir= new File(path);
 		if(!dir.exists()) {
 			dir.mkdir();
-			
+
 		}
 		File arq= new File(path, "Orientacao.csv");
 		boolean existe=false;
@@ -87,17 +88,13 @@ public class OrientacaoController implements ActionListener {
 			existe=true;
 		}
 		FileWriter fw= new FileWriter(arq, existe);
-		
+
 		PrintWriter pw= new PrintWriter(fw);
 		pw.write(csvOrientacao+"\r\n");
 		pw.flush();
 		pw.close();
 		fw.close();
-		
-		
+
+
 	}
-
-	}        
-		
-	
-
+}    
