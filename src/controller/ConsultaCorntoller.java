@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import model.Aluno;
 import model.Grupos;
 import model.Lista;
 
@@ -32,31 +33,44 @@ import model.Grupos;
 
 public class ConsultaCorntoller implements ActionListener {
 	 private JTextField  textFieldCodgpCp;
-		private  JTextField textFieldAREA;
+	 private  JTextField textFieldNOMEGP;
 		private  JTextField textFieldTEMAGP;
+		private  JTextField textFieldAREA;
 		private  JTextField textFieldSUBAREA;
 		private  JTextField textFieldDATA;
-		private  JTextField textFieldNOMEGP;
-		private  JTextArea  textAreaRAGP;
-		private  JTextArea  TextAreaNomeAlunosGP;
-		 private  JTextArea  textAreaCG;
+		private  JTextField textFieldCOD;
+		private  JTextField textField_ra01;
+		private  JTextField textField_ra02;
+		private  JTextField textField_ra03;
+		private  JTextField textField_ra04;
+		private JTextArea textAreaConsultaOrientacao;
+		private JTextField textFieldNome;
+		private  JTextField textFieldRa;
 	
 
 
-	public ConsultaCorntoller(JTextField textFieldCodgpCp, JTextArea textAreaRAGP, JTextField textFieldTEMAGP,
+	public ConsultaCorntoller(JTextField textFieldCodgpCp, JTextField textFieldTEMAGP,
 				JTextField textFieldSUBAREA, JTextField textFieldDATA, JTextField textFieldNOMEGP,
-				JTextField textFieldAREA, JTextArea textAreaNomeAlunosGP, JTextArea textAreaCG) {
-			super();
-			this.textFieldCodgpCp = textFieldCodgpCp;
-			this.textFieldAREA = textFieldAREA;
-			this.textFieldTEMAGP = textFieldTEMAGP;
-			this.textFieldSUBAREA = textFieldSUBAREA;
-			this.textFieldDATA = textFieldDATA;
-			this.textFieldNOMEGP = textFieldNOMEGP;
-			this.textAreaRAGP = textAreaRAGP;
-			TextAreaNomeAlunosGP = textAreaNomeAlunosGP;
-			this.textAreaCG = textAreaCG;
-		}
+				JTextField textFieldAREA, JTextField textField_ra01, JTextField textField_ra02, JTextField textField_ra03, 
+				JTextField textField_ra04,  JTextField textFieldCOD, JTextArea textAreaConsultaOrientacao, JTextField textFieldNome, JTextField textFieldRa ) {
+		
+		super();
+		this.textFieldNOMEGP = textFieldNOMEGP;
+		this.textFieldTEMAGP = textFieldTEMAGP;
+		this.textFieldAREA = textFieldAREA;
+		this.textFieldSUBAREA = textFieldSUBAREA;
+		this.textFieldDATA = textFieldDATA;
+		this.textFieldCOD = textFieldCOD;
+		this.textFieldCodgpCp = textFieldCodgpCp; // onde digita o código do grupo
+		this.textField_ra01 = textField_ra01;
+		this.textField_ra02 = textField_ra02;
+		this.textField_ra03 = textField_ra03;
+		this.textField_ra04 = textField_ra04;
+	this.textAreaConsultaOrientacao = textAreaConsultaOrientacao;
+	this.textFieldNome = textFieldNome;
+	this.textFieldRa = textFieldRa;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cdm = e.getActionCommand();
@@ -76,14 +90,19 @@ public class ConsultaCorntoller implements ActionListener {
 	}
 	private void Consulta() throws Exception {
 		var grupo=new Grupos();
-		grupo.codigo=textFieldCodgpCp.getText();
-		grupo.area=textFieldAREA.getText();
+		var aluno = new Aluno();
+		grupo.nome=textFieldNOMEGP.getText();
 		grupo.tema=textFieldTEMAGP.getText();
+		grupo.area=textFieldAREA.getText();
 		grupo.subarea=textFieldSUBAREA.getText();
 		grupo.data=textFieldDATA.getText();
-		grupo.nome=textFieldNOMEGP.getText();
-		grupo.RA=textAreaRAGP.getText();
-		grupo.alunos=TextAreaNomeAlunosGP.getText();
+		grupo.codigo=textFieldCodgpCp.getText();
+		grupo.Ra1 = textField_ra01.getText();
+		grupo.Ra2 = textField_ra02.getText();
+		grupo.Ra3 = textField_ra03.getText();
+		grupo.Ra4 = textField_ra04.getText();
+	    aluno.Nome = textFieldNome.getText();
+	    aluno.Ra = textFieldRa.getText();
 
 	Lista ConGP=new Lista();
 	
@@ -91,7 +110,7 @@ public class ConsultaCorntoller implements ActionListener {
 		grupo=buscaCodorientacao(grupo.codigo);
 	
 	if(grupo!= null) {
-		textAreaCG.setText("Codigo: "+ grupo.codigo+" - area: "+grupo.area +" - tema "+ grupo.tema+ "-subarea "+ grupo.subarea+ "- data "+ grupo.data+  "- nome "+ grupo.nome+ "-RA "+ grupo.RA+ " Alunos  "+ grupo.alunos);
+		textAreaConsultaOrientacao.setText("Codigo: "+ grupo.codigo+" - area: "+grupo.area +" - tema "+ grupo.tema+ "-subarea "+ grupo.subarea+ "- data "+ grupo.data+  "- nome "+ grupo.nome+ "-RA ");
 	}
 	
 	}else if(!grupo.area.equals("")) {
@@ -104,10 +123,14 @@ public class ConsultaCorntoller implements ActionListener {
 		ConGP = buscaData(grupo.data);
 	}else if(!grupo.nome.equals("")) {
 		ConGP = buscaNome(grupo.nome);
-	}else if(!grupo.alunos.equals("")) {
-		ConGP = buscaRa(grupo.RA);
-	}else if(!grupo.RA.equals("")) {
-		ConGP = buscaAlunos(grupo.alunos);
+	}else if(!grupo.Ra1.equals("")) {
+		ConGP = buscaRa(grupo.Ra1);
+	}else if(!grupo.Ra2.equals("")) {
+		ConGP = buscaRa(grupo.Ra2);
+	}else if(!grupo.Ra3.equals("")) {
+		ConGP = buscaRa(grupo.Ra3);
+	}else if(!grupo.Ra4.equals("")) {
+		ConGP = buscaRa(grupo.Ra4);
 	} else {
 		JOptionPane.showMessageDialog(null, "Prencha um campo", "ERRO!", JOptionPane.ERROR_MESSAGE);
 	}
@@ -116,9 +139,9 @@ public class ConsultaCorntoller implements ActionListener {
 	if(tamanholista>0) {
 	for(int i=0; i<tamanholista;i++) {
 		Grupos grupo1 =(Grupos) ConGP.get(i);
-		buffer.append("Codigo: "+ grupo1.codigo+" - area: "+grupo1.area +"- tema "+ grupo1.tema+ "-subarea "+ grupo1.subarea+ "- data"+ grupo1.data+  "- nome "+ grupo1.nome+ "-RA "+ grupo1.RA+ "Alunos"+ grupo1.alunos);
+		buffer.append("Codigo: "+ grupo1.codigo+" - area: "+grupo1.area +"- tema "+ grupo1.tema+ "-subarea "+ grupo1.subarea+ "- data"+ grupo1.data+  "- nome "+ grupo1.nome+ "RA "+ grupo1.RA+ "Alunos"+ grupo1.alunos);
 	}
-	textAreaCG.setText(buffer.toString());
+	textAreaConsultaOrientacao.setText(buffer.toString());
 	}
 }
 
@@ -358,7 +381,6 @@ public class ConsultaCorntoller implements ActionListener {
 				grupo.data=vetLinha[4];
 				grupo.nome=vetLinha[5];
 				grupo.RA=vetLinha[6];
-				grupo.alunos=vetLinha[7];
 
 			ConGP.addFirst(ConGP);
 			
@@ -373,40 +395,6 @@ public class ConsultaCorntoller implements ActionListener {
 		return ConGP;
 	
 	}
-	private Lista buscaAlunos(String alunos) throws IOException {
-		Lista ConGP=new Lista();
-		String path= System.getProperty ("user.home") + File.separator + "SistemaCadastro";
-		File arq= new File(path, "grupos.csv");
-		if(arq.exists() && arq.isFile()) {
-		FileInputStream fis=new FileInputStream(arq);
-		InputStreamReader isr= new InputStreamReader(fis);
-		BufferedReader buffer= new BufferedReader(isr);
-		String linha=buffer.readLine();
-		while(linha!=null) {
-			String[] vetLinha=linha.split(";");
-			if(vetLinha[7].equals(alunos)) {
-				Grupos grupo= new Grupos();
-				grupo.codigo=vetLinha[0];
-				grupo.area=vetLinha[1];
-				grupo.tema=vetLinha[2];
-				grupo.subarea=vetLinha[3];
-				grupo.data=vetLinha[4];
-				grupo.nome=vetLinha[5];
-				grupo.RA=vetLinha[6];
-				grupo.alunos=vetLinha[7];
-
-			ConGP.addFirst(ConGP);
-			
-			}
-			linha=buffer.readLine();
-
-		}           
-		buffer.close();
-		isr.close();
-		fis.close();
-	}
-		return ConGP;
 	
-	}
 		
 	}	

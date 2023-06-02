@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 
 import model.Lista;
 import model.Orientacao;
+import model.Pilha;
+
 public class CosultaOrientacao implements ActionListener {
 	private JTextField textFieldCodigoOrientacao;
 	private  JTextArea textAreaConsultaOrientacao;
@@ -42,7 +44,7 @@ public class CosultaOrientacao implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cdm = e.getActionCommand();
-		if(cdm.equals("Pesquisar")) {
+		if(cdm.equals("Ultima")) {
 			try {
 				Consulta();
 			} catch (IOException e1) {
@@ -63,9 +65,9 @@ public class CosultaOrientacao implements ActionListener {
 		orientacao.descricao=TextArea.getText();
 
 		Lista Orientacoes= new Lista();
-
+       Pilha p = new Pilha();
 		if(!orientacao.codOrientacao.equals("")) {
-			orientacao=buscaCodorientacao(orientacao.codOrientacao);	
+			p=buscaCodorientacao(orientacao.codOrientacao);	
 
 			if(orientacao!=null) {
 				textAreaConsultaOrientacao.setText(" Codigo Orientacao = "+ orientacao.codOrientacao+ " Codigo Grupo = " + orientacao.codigoGP+" Data = "+orientacao.data+ " Titulo = "+ orientacao.titulo+ " Descricao = "+  orientacao.descricao);
@@ -73,16 +75,16 @@ public class CosultaOrientacao implements ActionListener {
 
 
 		}else if (orientacao.codigoGP.equals("")) {
-			Orientacoes=BuscaCodGP(orientacao.codigoGP);
+			p=BuscaCodGP(orientacao.codigoGP);
 
 		}else if (!orientacao.titulo.equals("")) {
-			Orientacoes=BuscaTitulo(orientacao.titulo);
+			p=BuscaTitulo(orientacao.titulo);
 
 		}else if(!orientacao.data.equals("")) {
-			Orientacoes=BuscaData(orientacao.data);
+			p=BuscaData(orientacao.data);
 
 		}else if(!orientacao.descricao.equals("")) {
-			Orientacoes=BucarDescricao(orientacao.descricao);
+			p=BucarDescricao(orientacao.descricao);
 		}else {
 			JOptionPane.showMessageDialog(null, "Preencha um campo ", "ERRO", JOptionPane.ERROR_MESSAGE);
 		}
@@ -105,9 +107,9 @@ public class CosultaOrientacao implements ActionListener {
 	}
 
 
-
-	private Orientacao buscaCodorientacao(String codOrientacao) throws IOException {
-		Orientacao orientacao= new Orientacao();
+	private Pilha buscaCodorientacao(String codOrientacao) throws IOException {
+		Pilha p = new Pilha();
+		Orientacao orientacao=new Orientacao();
 		String path= System.getProperty ("user.home") + File.separator + "SistemaCadastro";
 		File arq= new File(path, "Orientacao.csv");
 		if(arq.exists() && arq.isFile()) {
@@ -123,8 +125,7 @@ public class CosultaOrientacao implements ActionListener {
 					orientacao.titulo=vetLinha[2];
 					orientacao.data=vetLinha[3];
 					orientacao.descricao=vetLinha[4];
-
-					break;
+                    p.push(orientacao.descricao);
 				}
 				linha=buffer.readLine();
 
@@ -136,115 +137,11 @@ public class CosultaOrientacao implements ActionListener {
 		if(orientacao.codOrientacao==null) {
 			orientacao=null;
 		}
-		return orientacao;
-	}
-
-	private Lista BuscaCodGP(String codigoGP) throws IOException {
-		Lista Orientacoes = new Lista();
-
-		String path= System.getProperty ("user.home") + File.separator + "SistemaCadastro";
-		File arq= new File(path, "Orientacao.csv");
-		if(arq.exists() && arq.isFile()) {
-			FileInputStream fis=new FileInputStream(arq);
-			InputStreamReader isr= new InputStreamReader(fis);
-			BufferedReader buffer= new BufferedReader(isr);
-			String linha=buffer.readLine();
-			while(linha!=null) {
-				String[] vetLinha=linha.split(";");
-				if(vetLinha[1].equals(codigoGP)) {
-					Orientacao orientacao= new Orientacao();
-					orientacao.codOrientacao=vetLinha[0];
-					orientacao.codigoGP=vetLinha[1];
-					orientacao.titulo=vetLinha[2];
-					orientacao.data=vetLinha[3];
-					orientacao.descricao=vetLinha[4];
-
-					Orientacoes.addFirst(orientacao);
-				}
-				linha=buffer.readLine();
-
-			}           
-			buffer.close();
-			isr.close();
-			fis.close();
-		}
-
-		return Orientacoes;
-	}
-	private Lista BuscaTitulo(String titulo) throws IOException {
-		Lista Orientacoes = new Lista();
-
-		String path= System.getProperty ("user.home") + File.separator + "SistemaCadastro";
-		File arq= new File(path, "Orientacao.csv");
-		if(arq.exists() && arq.isFile()) {
-			FileInputStream fis=new FileInputStream(arq);
-			InputStreamReader isr= new InputStreamReader(fis);
-			BufferedReader buffer= new BufferedReader(isr);
-			String linha=buffer.readLine();
-			while(linha!=null) {
-				String[] vetLinha=linha.split(";");
-				if(vetLinha[2].equals(titulo)) {
-					Orientacao orientacao= new Orientacao();
-					orientacao.codOrientacao=vetLinha[0];
-					orientacao.codigoGP=vetLinha[1];
-					orientacao.titulo=vetLinha[2];
-					orientacao.data=vetLinha[3];
-					orientacao.descricao=vetLinha[4];
-
-					Orientacoes.addFirst(orientacao);
-				}
-				linha=buffer.readLine();
-
-			}           
-			buffer.close();
-			isr.close();
-			fis.close();
-		}
-
-		return Orientacoes;
-	}
-
-
-	private Lista BuscaData(String data) throws IOException {
-
-		Lista Orientacoes = new Lista();
-
-		String path= System.getProperty ("user.home") + File.separator + "SistemaCadastro";
-		File arq= new File(path, "Orientacao.csv");
-		if(arq.exists() && arq.isFile()) {
-			FileInputStream fis=new FileInputStream(arq);
-			InputStreamReader isr= new InputStreamReader(fis);
-			BufferedReader buffer= new BufferedReader(isr);
-			String linha=buffer.readLine();
-			while(linha!=null) {
-				String[] vetLinha=linha.split(";");
-				if(vetLinha[3].equals(data)) {
-					Orientacao orientacao= new Orientacao();
-					orientacao.codOrientacao=vetLinha[0];
-					orientacao.codigoGP=vetLinha[1];
-					orientacao.titulo=vetLinha[2];
-					orientacao.data=vetLinha[3];
-					orientacao.descricao=vetLinha[4];
-
-					Orientacoes.addFirst(orientacao);
-				}
-				linha=buffer.readLine();
-
-			}           
-			buffer.close();
-			isr.close();
-			fis.close();
-		}
-
-		return Orientacoes;
-	}
-
-
-
-	private Lista BucarDescricao(String descricao) throws IOException {
-
-		Lista Orientacoes = new Lista();
-
+		return p;
+	}	
+	
+	private Pilha BucarDescricao(String descricao) throws IOException {
+		Pilha p = new Pilha();
 		String path= System.getProperty ("user.home") + File.separator + "SistemaCadastro";
 		File arq= new File(path, "Orientacao.csv");
 		if(arq.exists() && arq.isFile()) {
@@ -262,7 +159,7 @@ public class CosultaOrientacao implements ActionListener {
 					orientacao.data=vetLinha[3];
 					orientacao.descricao=vetLinha[4];
 
-					Orientacoes.addFirst(orientacao);
+					p.push(orientacao);
 				}
 				linha=buffer.readLine();
 
@@ -272,7 +169,110 @@ public class CosultaOrientacao implements ActionListener {
 			fis.close();
 		}
 
-		return Orientacoes;
-	}	
+		return p;
+	}
 
+
+
+	private Pilha BuscaData(String data) throws IOException {
+		Pilha p = new Pilha();
+		String path= System.getProperty ("user.home") + File.separator + "SistemaCadastro";
+		File arq= new File(path, "Orientacao.csv");
+		if(arq.exists() && arq.isFile()) {
+			FileInputStream fis=new FileInputStream(arq);
+			InputStreamReader isr= new InputStreamReader(fis);
+			BufferedReader buffer= new BufferedReader(isr);
+			String linha=buffer.readLine();
+			while(linha!=null) {
+				String[] vetLinha=linha.split(";");
+				if(vetLinha[3].equals(data)) {
+					Orientacao orientacao= new Orientacao();
+					orientacao.codOrientacao=vetLinha[0];
+					orientacao.codigoGP=vetLinha[1];
+					orientacao.titulo=vetLinha[2];
+					orientacao.data=vetLinha[3];
+					orientacao.descricao=vetLinha[4];
+
+					p.push(orientacao);
+				}
+				linha=buffer.readLine();
+
+			}           
+			buffer.close();
+			isr.close();
+			fis.close();
+		}
+
+		return p;
+	}
+
+
+
+
+	private Pilha BuscaTitulo(String titulo) throws IOException {
+		Pilha p = new Pilha();
+		String path= System.getProperty ("user.home") + File.separator + "SistemaCadastro";
+		File arq= new File(path, "Orientacao.csv");
+		if(arq.exists() && arq.isFile()) {
+			FileInputStream fis=new FileInputStream(arq);
+			InputStreamReader isr= new InputStreamReader(fis);
+			BufferedReader buffer= new BufferedReader(isr);
+			String linha=buffer.readLine();
+			while(linha!=null) {
+				String[] vetLinha=linha.split(";");
+				if(vetLinha[2].equals(titulo)) {
+					Orientacao orientacao= new Orientacao();
+					orientacao.codOrientacao=vetLinha[0];
+					orientacao.codigoGP=vetLinha[1];
+					orientacao.titulo=vetLinha[2];
+					orientacao.data=vetLinha[3];
+					orientacao.descricao=vetLinha[4];
+
+					p.push(orientacao);
+				}
+				linha=buffer.readLine();
+
+			}           
+			buffer.close();
+			isr.close();
+			fis.close();
+		}
+
+		return p;
+	}
+
+
+
+
+	private Pilha BuscaCodGP(String codigoGP) throws IOException {
+		Pilha p = new Pilha();
+		String path= System.getProperty ("user.home") + File.separator + "SistemaCadastro";
+		File arq= new File(path, "Orientacao.csv");
+		if(arq.exists() && arq.isFile()) {
+			FileInputStream fis=new FileInputStream(arq);
+			InputStreamReader isr= new InputStreamReader(fis);
+			BufferedReader buffer= new BufferedReader(isr);
+			String linha=buffer.readLine();
+			while(linha!=null) {
+				String[] vetLinha=linha.split(";");
+				if(vetLinha[1].equals(codigoGP)) {
+					Orientacao orientacao= new Orientacao();
+					orientacao.codOrientacao=vetLinha[0];
+					orientacao.codigoGP=vetLinha[1];
+					orientacao.titulo=vetLinha[2];
+					orientacao.data=vetLinha[3];
+					orientacao.descricao=vetLinha[4];
+
+					p.push(orientacao);
+				}
+				linha=buffer.readLine();
+
+			}           
+			buffer.close();
+			isr.close();
+			fis.close();
+		}
+
+		return p;
+	}	
 }

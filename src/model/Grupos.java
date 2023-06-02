@@ -11,6 +11,7 @@ public class Grupos {
       public  String Ra2;
       public  String Ra3;
       public  String Ra4;
+	public String alunos;
 
 	@Override
 	public String toString() {

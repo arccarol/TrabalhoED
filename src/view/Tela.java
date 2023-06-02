@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Color;
-
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -44,10 +43,10 @@ public class Tela extends JFrame {
 	private JTextField textFieldDataOrientacaoOrientacao;
 	private JTextField textFieldCoDGRUPOOrientacao;
 	private JTextField textFieldCodigoOrientacao;
+	private JTextField textField_ra02;
 	private JTextField textField_ra03;
 	private JTextField textField_ra04;
 	private JTextField textField_ra01;
-	private JTextField textField_ra02;
 
 	/**
 	 * Launch the application.
@@ -93,7 +92,9 @@ public class Tela extends JFrame {
 		btnlimpar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnlimpar.setBounds(80, 166, 101, 23);
 		CadstrarAlunos.add(btnlimpar);
+
 		btnlimpar.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				// Código para limpar ou redefinir os valores aqui
 				// Exemplo: Limpar campos de texto
@@ -105,9 +106,11 @@ public class Tela extends JFrame {
 
 		JButton btncadastrar = new JButton("Cadastrar");
 		btncadastrar.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+
 		btncadastrar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btncadastrar.setBounds(287, 166, 122, 23);
 		CadstrarAlunos.add(btncadastrar);
@@ -127,7 +130,133 @@ public class Tela extends JFrame {
 		lblCadastrarAlunos.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblCadastrarAlunos.setBounds(213, 26, 276, 14);
 		CadstrarAlunos.add(lblCadastrarAlunos);
-		/*-------------- cadastro alunos -------------*/
+		JPanel InserirGrupos = new JPanel();
+		tabbedPane.addTab("InserirGrupos", null, InserirGrupos, "Cadastro de Grupos");
+		InserirGrupos.setLayout(null);
+
+		JLabel lblNomeGrupo = new JLabel("Nome: ");
+		lblNomeGrupo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNomeGrupo.setBounds(10, 33, 74, 14);
+		InserirGrupos.add(lblNomeGrupo);
+
+		JLabel lblTemaGP = new JLabel("Tema do Grupo: ");
+		lblTemaGP.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTemaGP.setBounds(348, 47, 123, 19);
+		InserirGrupos.add(lblTemaGP);
+
+		JLabel lblAreaDoConhecimento = new JLabel("Area do conhecimento ");
+		lblAreaDoConhecimento.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblAreaDoConhecimento.setBounds(10, 80, 197, 14);
+		InserirGrupos.add(lblAreaDoConhecimento);
+
+		JLabel lblSubara = new JLabel("Subárea ");
+		lblSubara.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSubara.setBounds(400, 99, 75, 14);
+		InserirGrupos.add(lblSubara);
+
+		JLabel lblDataDaFormao = new JLabel("Data da Formação: ");
+		lblDataDaFormao.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblDataDaFormao.setBounds(10, 138, 139, 14);
+		InserirGrupos.add(lblDataDaFormao);
+
+		JLabel lblRaGP = new JLabel("RA: ");
+		lblRaGP.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblRaGP.setBounds(10, 221, 139, 14);
+		InserirGrupos.add(lblRaGP);
+
+		JLabel lblCodGupo = new JLabel("CodigoGP: ");
+		lblCodGupo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblCodGupo.setBounds(335, 138, 139, 17);
+		InserirGrupos.add(lblCodGupo);
+
+		textFieldNOMEGP = new JTextField();
+		textFieldNOMEGP.setColumns(10);
+		textFieldNOMEGP.setBounds(82, 32, 181, 20);
+		InserirGrupos.add(textFieldNOMEGP);
+
+		textFieldTEMAGP = new JTextField();
+		textFieldTEMAGP.setColumns(10);
+		textFieldTEMAGP.setBounds(518, 48, 167, 20);
+		InserirGrupos.add(textFieldTEMAGP);
+
+		textFieldAREA = new JTextField();
+		textFieldAREA.setColumns(10);
+		textFieldAREA.setBounds(184, 77, 167, 20);
+		InserirGrupos.add(textFieldAREA);
+
+		textFieldSUBAREA = new JTextField();
+		textFieldSUBAREA.setColumns(10);
+		textFieldSUBAREA.setBounds(485, 98, 160, 20);
+		InserirGrupos.add(textFieldSUBAREA);
+
+		textFieldDATA = new JTextField();
+		textFieldDATA.setBounds(159, 137, 123, 20);
+		InserirGrupos.add(textFieldDATA);
+		textFieldDATA.setColumns(10);
+
+		textFieldCOD = new JTextField();
+		textFieldCOD.setColumns(10);
+		textFieldCOD.setBounds(460, 137, 139, 20);
+		InserirGrupos.add(textFieldCOD);
+
+		JButton btnCodGerar = new JButton("Cadastrar");
+		btnCodGerar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCodGerar.setBounds(105, 363, 118, 23);
+		InserirGrupos.add(btnCodGerar);
+
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCancelar.setBounds(347, 363, 89, 23);
+		InserirGrupos.add(btnCancelar);
+
+		JLabel lblTitulo = new JLabel("Cadastro de Grupos");
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTitulo.setBounds(261, 11, 198, 19);
+		InserirGrupos.add(lblTitulo);
+
+
+	
+
+		textField_ra02 = new JTextField();
+		textField_ra02.setColumns(10);
+		textField_ra02.setBounds(82, 220, 171, 20);
+		InserirGrupos.add(textField_ra02);
+
+		JLabel lblRaGP_1 = new JLabel("RA: ");
+		lblRaGP_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblRaGP_1.setBounds(10, 262, 139, 14);
+		InserirGrupos.add(lblRaGP_1);
+
+		textField_ra03 = new JTextField();
+		textField_ra03.setColumns(10);
+		textField_ra03.setBounds(82, 261, 171, 20);
+		InserirGrupos.add(textField_ra03);
+
+		JLabel lblRaGP_1_1 = new JLabel("RA: ");
+		lblRaGP_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblRaGP_1_1.setBounds(10, 308, 139, 14);
+		InserirGrupos.add(lblRaGP_1_1);
+
+		textField_ra04 = new JTextField();
+		textField_ra04.setColumns(10);
+		textField_ra04.setBounds(82, 307, 171, 20);
+		InserirGrupos.add(textField_ra04);
+
+		JLabel lblRaGP_3 = new JLabel("RA: ");
+		lblRaGP_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblRaGP_3.setBounds(10, 191, 139, 14);
+		InserirGrupos.add(lblRaGP_3);
+
+		textField_ra01 = new JTextField();
+		textField_ra01.setColumns(10);
+		textField_ra01.setBounds(82, 190, 171, 20);
+		InserirGrupos.add(textField_ra01);
+
+		
+
+		
+
+		//-------------- cadastro alunos -------------/
 
 		JPanel ConsultarGP = new JPanel();
 		tabbedPane.addTab("Consultar GP", null, ConsultarGP, "Consultar Grupos");
@@ -272,119 +401,6 @@ public class Tela extends JFrame {
 		JTextArea textArea = new JTextArea();
 		scrollPaneDescricaoOrientacao.setViewportView(textArea);
 		textArea.setBackground(new Color(255, 255, 255));
-		JPanel InserirGrupos = new JPanel();
-		tabbedPane.addTab("InserirGrupos", null, InserirGrupos, "Cadastro de Grupos");
-		InserirGrupos.setLayout(null);
-
-		JLabel lblNomeGrupo = new JLabel("Nome: ");
-		lblNomeGrupo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNomeGrupo.setBounds(10, 33, 74, 14);
-		InserirGrupos.add(lblNomeGrupo);
-
-		JLabel lblTemaGP = new JLabel("Tema do Grupo: ");
-		lblTemaGP.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTemaGP.setBounds(348, 47, 123, 19);
-		InserirGrupos.add(lblTemaGP);
-
-		JLabel lblAreaDoConhecimento = new JLabel("Area do conhecimento ");
-		lblAreaDoConhecimento.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAreaDoConhecimento.setBounds(10, 80, 197, 14);
-		InserirGrupos.add(lblAreaDoConhecimento);
-
-		JLabel lblSubara = new JLabel("Subárea ");
-		lblSubara.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblSubara.setBounds(400, 99, 75, 14);
-		InserirGrupos.add(lblSubara);
-
-		JLabel lblDataDaFormao = new JLabel("Data da Formação: ");
-		lblDataDaFormao.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDataDaFormao.setBounds(10, 138, 139, 14);
-		InserirGrupos.add(lblDataDaFormao);
-
-		JLabel lblRaGP = new JLabel("RA: ");
-		lblRaGP.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblRaGP.setBounds(10, 221, 139, 14);
-		InserirGrupos.add(lblRaGP);
-
-		JLabel lblCodGupo = new JLabel("CodigoGP: ");
-		lblCodGupo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCodGupo.setBounds(335, 138, 139, 17);
-		InserirGrupos.add(lblCodGupo);
-
-		textFieldNOMEGP = new JTextField();
-		textFieldNOMEGP.setColumns(10);
-		textFieldNOMEGP.setBounds(82, 32, 181, 20);
-		InserirGrupos.add(textFieldNOMEGP);
-
-		textFieldTEMAGP = new JTextField();
-		textFieldTEMAGP.setColumns(10);
-		textFieldTEMAGP.setBounds(518, 48, 167, 20);
-		InserirGrupos.add(textFieldTEMAGP);
-
-		textFieldAREA = new JTextField();
-		textFieldAREA.setColumns(10);
-		textFieldAREA.setBounds(184, 77, 167, 20);
-		InserirGrupos.add(textFieldAREA);
-
-		textFieldSUBAREA = new JTextField();
-		textFieldSUBAREA.setColumns(10);
-		textFieldSUBAREA.setBounds(485, 98, 160, 20);
-		InserirGrupos.add(textFieldSUBAREA);
-
-		textFieldDATA = new JTextField();
-		textFieldDATA.setBounds(159, 137, 123, 20);
-		InserirGrupos.add(textFieldDATA);
-		textFieldDATA.setColumns(10);
-
-		textFieldCOD = new JTextField();
-		textFieldCOD.setColumns(10);
-		textFieldCOD.setBounds(460, 137, 139, 20);
-		InserirGrupos.add(textFieldCOD);
-
-		JButton btnCodGerar = new JButton("Cadastrar");
-		btnCodGerar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnCodGerar.setBounds(105, 363, 118, 23);
-		InserirGrupos.add(btnCodGerar);
-
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnCancelar.setBounds(347, 363, 89, 23);
-		InserirGrupos.add(btnCancelar);
-
-		JLabel lblTitulo = new JLabel("Cadastro de Grupos");
-		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTitulo.setBounds(261, 11, 198, 19);
-		InserirGrupos.add(lblTitulo);
-
-		JLabel lblRaGP_1 = new JLabel("RA: ");
-		lblRaGP_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblRaGP_1.setBounds(10, 262, 139, 14);
-		InserirGrupos.add(lblRaGP_1);
-
-		textField_ra03 = new JTextField();
-		textField_ra03.setColumns(10);
-		textField_ra03.setBounds(82, 261, 171, 20);
-		InserirGrupos.add(textField_ra03);
-
-		JLabel lblRaGP_1_1 = new JLabel("RA: ");
-		lblRaGP_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblRaGP_1_1.setBounds(10, 308, 139, 14);
-		InserirGrupos.add(lblRaGP_1_1);
-
-		textField_ra04 = new JTextField();
-		textField_ra04.setColumns(10);
-		textField_ra04.setBounds(82, 307, 171, 20);
-		InserirGrupos.add(textField_ra04);
-
-		JLabel lblRaGP_3 = new JLabel("RA: ");
-		lblRaGP_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblRaGP_3.setBounds(10, 191, 139, 14);
-		InserirGrupos.add(lblRaGP_3);
-
-		textField_ra01 = new JTextField();
-		textField_ra01.setColumns(10);
-		textField_ra01.setBounds(82, 190, 171, 20);
-		InserirGrupos.add(textField_ra01);
 
 		JPanel ConsultarOrientação = new JPanel();
 		ConsultarOrientação.setLayout(null);
@@ -403,7 +419,7 @@ public class Tela extends JFrame {
 
 		JButton btnConsultarOrientacao = new JButton("Pesquisar");
 		btnConsultarOrientacao.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnConsultarOrientacao.setBounds(418, 96, 134, 23);
+		btnConsultarOrientacao.setBounds(418, 141, 134, 23);
 		ConsultarOrientação.add(btnConsultarOrientacao);
 
 		JLabel lblConsultargp_1 = new JLabel("Consultar Orientação: ");
@@ -422,19 +438,12 @@ public class Tela extends JFrame {
 
 		JTextArea textAreaConsultaOrientacao = new JTextArea();
 		scrollPane.setViewportView(textAreaConsultaOrientacao);
-		
-		ControllerSubGP CsCont= new ControllerSubGP (textFieldSubarea,  textAreaCS,  textFieldNOMEGP, textFieldCodgpCp);
-		
-		textField_ra02 = new JTextField();
-		textField_ra02.setBounds(82, 220, 171, 19);
-		InserirGrupos.add(textField_ra02);
-		textField_ra02.setColumns(10);
 
 		CosultaOrientacao CCont= new CosultaOrientacao (textFieldCodigoOrientacao, textAreaConsultaOrientacao, textFieldCoDGRUPOOrientacao, textFieldTituloOrientacao,  textFieldDataOrientacaoOrientacao, textArea);
-		
+
 		JButton btnultimaOrientacao = new JButton("Ultima");
 		btnultimaOrientacao.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnultimaOrientacao.setBounds(418, 140, 134, 23);
+		btnultimaOrientacao.setBounds(418, 96, 134, 23);
 		ConsultarOrientação.add(btnultimaOrientacao);
 		btnConsultarOrientacao.addActionListener(CCont);
 		contentPane = new JPanel();
@@ -442,17 +451,18 @@ public class Tela extends JFrame {
 
 		AlunosController Vcont= new AlunosController(textFieldNome, textFieldRa);
 		btncadastrar.addActionListener(Vcont);
-		btnPesquisarSUB.addActionListener(CsCont);
 
+		CosultaOrientacao CCont1= new CosultaOrientacao (textFieldCodigoOrientacao, textAreaConsultaOrientacao, textFieldCoDGRUPOOrientacao, textFieldTituloOrientacao,  textFieldDataOrientacaoOrientacao, textArea);
+		btnultimaOrientacao.addActionListener(CCont1);
+		
+		ControllerSubGP CsCont1= new ControllerSubGP (textFieldSubarea,  textAreaCS,  textFieldNOMEGP, textFieldCodgpCp);
+		btnPesquisarSUB.addActionListener(CsCont1);
+		
 		OrientacaoController Ocontroller= new OrientacaoController(textFieldCodOrientacao, textFieldCoDGRUPOOrientacao, textFieldTituloOrientacao, textFieldDataOrientacaoOrientacao, textArea);
 		btnCadastrarOrientacao.addActionListener((ActionListener) Ocontroller);
+	
 
-		GruposController GC = new GruposController( textFieldNOMEGP,  textFieldTEMAGP,  textFieldAREA,
-			 textFieldSUBAREA,textFieldDATA, textFieldCOD,
-				 textField_ra01,  textField_ra02,  textField_ra03,  textField_ra04  );
-		
+		GruposController GC = new GruposController(textFieldNOMEGP,  textFieldTEMAGP, textFieldAREA, textFieldSUBAREA,  textFieldDATA, textFieldCOD, textField_ra01, textField_ra02,  textField_ra03,  textField_ra04 );
 		btnCodGerar.addActionListener(GC);
-
-
 	}
 }
